@@ -1,17 +1,28 @@
 package it.mauiroma.msa.sb;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 public class SBController {
     
+    /*
     @RequestMapping("/greetings")
     public String greetings() {
         return "Greetings from Spring Boot!";
     }
+    */
+
+    @RequestMapping("/greetings")
+    public String greetings(@RequestHeader MultiValueMap<String, String> headers) {
+        headers.forEach((key, value) -> {
+            System.out.println(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
+        });
+        return "Greetings from Spring Boot!";
+    }
+
 
 
     @RequestMapping("/hello")
