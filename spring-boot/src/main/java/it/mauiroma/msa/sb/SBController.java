@@ -20,7 +20,7 @@ public class SBController {
         headers.forEach((key, value) -> {
             System.out.println(String.format("Header '%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
         });
-        return "Greetings from Spring Boot!";
+        return "Greetings to ["+headers.get("user")+"]!";
     }
 
 
